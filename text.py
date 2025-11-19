@@ -239,3 +239,4 @@ for sched in st.session_state.schedules:
                 f"{int(time_diff)} minutes."
             )
             sched["Status"] = "Missed"
+
