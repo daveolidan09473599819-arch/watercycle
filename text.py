@@ -15,25 +15,8 @@ page_bg_img = """
     background-position: center;
     background-attachment: fixed;
 }
-[data-testid="stAppViewContainer"]::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.85);
-    z-index: -1;
-}
 [data-testid="stSidebar"] {
     background: linear-gradient(180deg, #4CBB17, #2E8B57);
-}
-.main-content {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 12px;
-    padding: 20px;
-    margin: 10px 0;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 * { font-family: 'Poppins', sans-serif; }
 .app-header {
@@ -106,7 +89,6 @@ if "harvest_results" not in st.session_state:
     st.session_state.harvest_results = []
 
 def signup():
-    st.markdown('<div class="main-content">', unsafe_allow_html=True)
     st.subheader("Create Account")
     user = st.text_input("Username", key="signup_user")
     pw = st.text_input("Password", type="password", key="signup_pass")
@@ -119,10 +101,8 @@ def signup():
             st.success(f"✅ {role} account created! Please log in.")
         else:
             st.error("❌ Please fill in all fields.")
-    st.markdown('</div>', unsafe_allow_html=True)
 
 def login():
-    st.markdown('<div class="main-content">', unsafe_allow_html=True)
     st.subheader("Log In")
     user = st.text_input("Username", key="login_user")
     pw = st.text_input("Password", type="password", key="login_pass")
@@ -133,7 +113,6 @@ def login():
             st.rerun()
         else:
             st.error("❌ Invalid username or password.")
-    st.markdown('</div>', unsafe_allow_html=True)
 
 def logout():
     st.session_state.logged_in_user = None
@@ -158,7 +137,6 @@ with col2:
 
 # ------------------ ADMIN VIEW ------------------
 if role == "Admin":
-    st.markdown('<div class="main-content">', unsafe_allow_html=True)
     st.subheader("Admin Dashboard")
 
     # USERS TABLE
@@ -211,7 +189,6 @@ if role == "Admin":
                     st.rerun()
     else:
         st.info("No AI harvest results yet.")
-    st.markdown('</div>', unsafe_allow_html=True)
     st.stop()
 
 # ------------------ USER VIEW ------------------
@@ -244,7 +221,6 @@ with st.sidebar.expander("➕ Register New Farm"):
             st.error("❌ Please fill all fields.")
 
 # ------------------ USER DASHBOARD ------------------
-st.markdown('<div class="main-content">', unsafe_allow_html=True)
 st.subheader("🌾 My Farm Dashboard")
 user_farms = [f for f in st.session_state.farms if f["Owner"] == current_user]
 
@@ -305,4 +281,3 @@ if user_farms:
             st.write(f"⭐ Expected Quality: *{quality}*")
 else:
     st.info("You haven't registered any farms yet.")
-st.markdown('</div>', unsafe_allow_html=True)
